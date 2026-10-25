@@ -29,8 +29,9 @@ const scenarios = [
   {
     name: 'Fleet health, empty filter', hash: 'fleet',
     act: async (p) => {
-      await p.getByRole('radio', { name: 'Double-deck' }).check()
+      // Depot first: once a model is chosen, depots without it are disabled.
       await p.getByRole('combobox', { name: 'Depot' }).selectOption('Ashcombe')
+      await p.getByRole('radio', { name: 'Double-deck' }).check()
       await p.getByText(/No double-deck buses at Ashcombe/).waitFor()
     },
   },

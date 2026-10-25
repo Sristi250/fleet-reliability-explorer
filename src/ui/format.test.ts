@@ -1,6 +1,19 @@
 import { describe, expect, it } from 'vitest'
 import { fmt } from './format'
 
+describe('counts and signs', () => {
+  it('pluralises', () => {
+    expect(fmt.count(1, 'failure')).toBe('1 failure')
+    expect(fmt.count(55, 'failure')).toBe('55 failures')
+    expect(fmt.count(26, 'bus', 'buses')).toBe('26 buses')
+    expect(fmt.count(1, 'bus', 'buses')).toBe('1 bus')
+  })
+  it('signs percentages with a real minus', () => {
+    expect(fmt.signedPct(-0.0612)).toBe('−6%')
+    expect(fmt.signedPct(0.25)).toBe('+25%')
+  })
+})
+
 describe('number wording', () => {
   it('writes distances in the short "m km" / "k km" style', () => {
     expect(fmt.distance(47_929_661)).toBe('47.9m km')

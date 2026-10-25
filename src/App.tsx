@@ -103,8 +103,11 @@ export default function App() {
           <div className="brand">
             <span className="logo"><BusIcon /></span>
             <div>
-              <h1>Fleet Reliability Explorer</h1>
-              <p>Kestrel Bus Group · Battery-Electric Fleet <span className="badge">Synthetic Data</span></p>
+              <div className="brand-title">
+                <h1>Fleet Reliability Explorer</h1>
+                <span className="badge">Synthetic Data</span>
+              </div>
+              <p className="brand-sub">Kestrel Bus Group · Battery-Electric Fleet</p>
             </div>
           </div>
           <nav aria-label="Main">
@@ -145,7 +148,7 @@ export default function App() {
             <h2 className="view-title">{current.question}</h2>
             <p className="view-desc">{current.description}</p>
           </div>
-          {state.status === 'loading' && <ViewSkeleton />}
+          {state.status === 'loading' && <ViewSkeleton kind={tab} />}
           {state.status === 'error' && (
             <div className="state state-error" role="alert">
               <strong>Couldn't Load the Fleet Data</strong>
@@ -166,8 +169,11 @@ export default function App() {
       </main>
 
       <footer className="container app-footer">
-        All data is synthetic, generated to resemble a UK battery-electric bus fleet. No real operator,
-        manufacturer, vehicle or price appears. Analysis window: each depot's EAM go-live to 31 May 2026.
+        <div>
+          All data is synthetic, generated to resemble a UK battery-electric bus fleet. No real operator,
+          manufacturer, vehicle or price appears. Analysis window: from each depot joining the maintenance
+          system (EAM) to 31 May 2026.
+        </div>
       </footer>
     </>
   )

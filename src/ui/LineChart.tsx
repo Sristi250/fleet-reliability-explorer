@@ -31,14 +31,18 @@ function useWidth<T extends HTMLElement>() {
   return [ref, width] as const
 }
 
-const M = { top: 12, right: 16, bottom: 28, left: 56 }
+// Top margin leaves room for the axis title above the plot, clear of the top tick.
+const M = { top: 30, right: 16, bottom: 28, left: 56 }
 
 export function LineChart({
-  labels, series, formatY, formatX, formatTooltipX, height = 260, ariaLabel, yLabel,
+  labels, series, formatY, formatValue, formatX, formatTooltipX, height = 260, ariaLabel, yLabel,
 }: {
   labels: string[]
   series: LineSeries[]
+  /** Axis ticks (short, e.g. "80K"). */
   formatY: (n: number) => string
+  /** Tooltip values (full, with units, e.g. "67,912 km"). Defaults to formatY. */
+  formatValue?: (n: number) => string
   formatX: (label: string) => string
   formatTooltipX?: (label: string) => string
   height?: number
@@ -106,7 +110,7 @@ export function LineChart({
           onFocus={() => setActive((a) => a ?? n - 1)}
           onBlur={() => setActive(null)}
         >
-          {yLabel && <text className="axis-title" x={M.left} y={M.top - 2}>{yLabel}</text>}
+          {yLabel && <text className="axis-title" x={0} y={12}>{yLabel}</text>}
           {ticks.map((t) => (
             <g key={t}>
               <line className={t === 0 ? 'baseline' : 'grid'} x1={M.left} x2={width - M.right} y1={y(t)} y2={y(t)} />
@@ -114,7 +118,8 @@ export function LineChart({
             </g>
           ))}
           {labels.map((l, i) => (i % xEvery === 0 || i === n - 1) && (n - 1 - i >= xEvery || i === n - 1) ? (
-            <text key={l} className="tick" x={x(i)} y={height - 8} textAnchor="middle">{formatX(l)}</text>
+            // End labels anchor inwards so they stay inside the plot.
+            <text key={l} className="tick" x={x(i)} y={height - 8} textAnchor={i === 0 ? 'start' : i === n - 1 ? 'end' : 'middle'}>{formatX(l)}</text>
           ) : null)}
           {active !== null && <line className="crosshair" x1={x(active)} x2={x(active)} y1={M.top} y2={M.top + innerH} />}
           {series.map((s) => (
@@ -155,7 +160,7 @@ export function LineChart({
               <div key={s.id} className="tooltip-row">
                 <span className="key-line" style={{ background: s.color }} />
                 <span>{s.label}</span>
-                <strong>{s.values[active] === null ? '–' : formatY(s.values[active]!)}</strong>
+                <strong>{s.values[active] === null ? '–' : (formatValue ?? formatY)(s.values[active]!)}</strong>
               </div>
             ))}
           </div>

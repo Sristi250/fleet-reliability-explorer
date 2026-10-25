@@ -39,6 +39,10 @@ export const fmt = {
   gbpCompact: (n: number) => upperSuffix(gbpCompact.format(n)),
   pct: (n: number, dp = 0) => `${(n * 100).toFixed(dp)}%`,
   title: titleCase,
+  /** 1 failure / 2 failures */
+  count: (n: number, singular: string, plural = `${singular}s`) => `${int.format(n)} ${n === 1 ? singular : plural}`,
+  /** Signed percent with a real minus sign: -0.06 -> "−6%". */
+  signedPct: (n: number) => `${n < 0 ? '−' : n > 0 ? '+' : ''}${Math.abs(n * 100).toFixed(0)}%`,
   num: (n: number, dp = 1) => n.toFixed(dp),
   /** 2025-03-01 -> Mar 2025 */
   month: (iso: string) => `${months[Number(iso.slice(5, 7)) - 1]} ${iso.slice(0, 4)}`,

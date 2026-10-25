@@ -27,12 +27,16 @@ export function SliceFilters({ slice, setSlice, depots }: {
         onChange={(depot) => setSlice({ ...slice, depot })}
         options={[
           { value: 'all', label: 'All Depots' },
-          ...depots.map((d) => ({
-            value: d.name,
-            label: slice.model !== 'all' && !d.models.includes(slice.model)
-              ? `${d.name} (no ${MODEL_LABEL[slice.model].toLowerCase()} buses)`
-              : d.name,
-          })),
+          ...depots.map((d) => {
+            // Depots that don't run the chosen model can't be picked (but stay visible).
+            const model = slice.model === 'all' ? null : slice.model
+            const unavailable = model !== null && !d.models.includes(model)
+            return {
+              value: d.name,
+              label: model !== null && unavailable ? `${d.name} (No ${MODEL_LABEL[model]})` : d.name,
+              disabled: unavailable && slice.depot !== d.name,
+            }
+          }),
         ]}
       />
     </>
@@ -45,7 +49,7 @@ export function EmptySlice({ slice, setSlice }: { slice: Slice; setSlice: (s: Sl
   const where = slice.depot === 'all' ? 'in the fleet' : `at ${slice.depot}`
   return (
     <div className="state" role="status">
-      <strong>No {what} {where}.</strong>
+      <strong>No {what} {where}</strong>
       <span>Change the model or depot filter to see results.</span>
       <div className="state-actions">
         {slice.model !== 'all' && (

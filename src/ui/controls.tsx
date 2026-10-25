@@ -8,6 +8,7 @@ const SPRING = { type: 'spring', bounce: 0.15, duration: 0.35 } as const
 interface Option<T extends string> {
   value: T
   label: string
+  disabled?: boolean
 }
 
 /** A segmented control built on native radios, so keyboard and screen readers work for free. */
@@ -46,15 +47,25 @@ export function Select<T extends string>({
     <div className="control">
       <label className="control-label" htmlFor={id}>{label}</label>
       <select id={id} className="select" value={value} onChange={(e) => onChange(e.target.value as T)}>
-        {options.map((o) => <option key={o.value} value={o.value}>{o.label}</option>)}
+        {options.map((o) => <option key={o.value} value={o.value} disabled={o.disabled}>{o.label}</option>)}
       </select>
     </div>
   )
 }
 
 export function NumberField({
-  label, unit, value, onChange, step = 1, min = 0,
-}: { label: string; unit?: string; value: number; onChange: (v: number) => void; step?: number; min?: number }) {
+  label, unit, prefix, value, onChange, step = 1, min = 0,
+}: {
+  label: string
+  /** Shown after the number (e.g. "km/year"). */
+  unit?: string
+  /** Shown before the number (e.g. "£"). */
+  prefix?: string
+  value: number
+  onChange: (v: number) => void
+  step?: number
+  min?: number
+}) {
   const id = useId()
   // Keep the typed text separately, so the field can be cleared or half-typed
   // without snapping to 0. Only valid numbers reach the calculation.
@@ -69,8 +80,9 @@ export function NumberField({
   const invalid = text.trim() === '' || !Number.isFinite(parsed) || parsed < min
   return (
     <div className="number-field">
-      <label htmlFor={id}>{label}</label>
+      <label className="field-label" htmlFor={id}>{label}</label>
       <div className={invalid ? 'number-input is-invalid' : 'number-input'}>
+        {prefix && <span className="unit unit-prefix" aria-hidden="true">{prefix}</span>}
         <input
           id={id}
           type="number"
@@ -91,7 +103,11 @@ export function NumberField({
         />
         {unit && <span className="unit">{unit}</span>}
       </div>
-      {invalid && <div id={`${id}-err`} className="field-error">Enter a number{min === 0 ? ' of 0 or more' : ''}.</div>}
+      {invalid && (
+        <div id={`${id}-err`} className="field-error">
+          Enter a number of {min} or more. Results use the last valid value ({lastValue}).
+        </div>
+      )}
     </div>
   )
 }
