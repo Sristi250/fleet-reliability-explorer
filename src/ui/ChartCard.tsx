@@ -11,7 +11,8 @@ export function DataTable<R>({ columns, rows, caption, rowKey }: {
   columns: Column<R>[]; rows: R[]; caption: string; rowKey: (r: R) => string
 }) {
   return (
-    <div className="table-wrap" tabIndex={0} role="region" aria-label={caption}>
+    // Focusable so keyboard users can scroll it; named apart from the card it sits in.
+    <div className="table-wrap" tabIndex={0} role="region" aria-label={`${caption} (table)`}>
       <table className="data-table">
         <caption className="sr-only">{caption}</caption>
         <thead>

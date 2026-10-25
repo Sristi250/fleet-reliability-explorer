@@ -92,7 +92,7 @@ export default function App() {
                 role="tab"
                 type="button"
                 aria-selected={tab === t.id}
-                aria-controls="main"
+                aria-controls="panel"
                 tabIndex={tab === t.id ? 0 : -1}
                 className="tab"
                 onClick={() => select(t.id)}
@@ -104,7 +104,8 @@ export default function App() {
         </nav>
       </header>
 
-      <main id="main" role="tabpanel" aria-labelledby={`tab-${tab}`} tabIndex={-1}>
+      <main id="main" tabIndex={-1}>
+        <div id="panel" role="tabpanel" aria-labelledby={`tab-${tab}`}>
         <p className="question">{current.question}</p>
         {state.status === 'loading' && (
           <div className="state" role="status">
@@ -126,6 +127,7 @@ export default function App() {
             {tab === 'whatif' && <RmWhatIf data={state.data} />}
           </>
         )}
+        </div>
       </main>
 
       <footer className="app-footer">
