@@ -104,7 +104,7 @@ export function RmWhatIf({ data }: { data: FleetData }) {
 
         <ChartCard
           title="Lifetime Cost per Bus"
-          subtitle={`TCO = bus price + R&M + energy, over ${a.lifeYears} years and ${fmt.compact(a.kmPerYear * a.lifeYears)} km.`}
+          subtitle={`TCO = bus price + R&M + energy, over ${a.lifeYears} years and ${fmt.distance(a.kmPerYear * a.lifeYears)}.`}
           table={
             <DataTable
               caption="Lifetime Cost per Bus, Before and After"

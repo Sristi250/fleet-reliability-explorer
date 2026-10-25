@@ -20,16 +20,23 @@ function titleCase(text: string): string {
   })
 }
 
-const months =['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+/** en-GB writes compact numbers as "48k" / "47.9m"; use capitals (48K, 47.9M) so "m" can't be misread as metres. */
+const upperSuffix = (s: string) => s.replace(/([0-9])\s?([kmbt])$/i, (_, d: string, unit: string) => d + unit.toUpperCase())
 
 export const fmt = {
   int: (n: number) => int.format(n),
-  compact: (n: number) => compact.format(n),
+  /** 80000 -> 80K (axis ticks). */
+  compact: (n: number) => upperSuffix(compact.format(n)),
   km: (n: number | null) => (n === null ? '–' : `${int.format(n)} km`),
+  /** Short distance: 47,929,661 -> "47.9m km", 855,000 -> "855k km" (the owner's preferred style). */
+  distance: (n: number | null) => (n === null ? '–' : `${compact.format(n)} km`),
   gbp: (n: number) => gbp0.format(n),
   gbp2: (n: number) => gbp2.format(n),
   gbp3: (n: number) => gbp3.format(n),
-  gbpCompact: (n: number) => gbpCompact.format(n),
+  /** 747200 -> £747.2K */
+  gbpCompact: (n: number) => upperSuffix(gbpCompact.format(n)),
   pct: (n: number, dp = 0) => `${(n * 100).toFixed(dp)}%`,
   title: titleCase,
   num: (n: number, dp = 1) => n.toFixed(dp),

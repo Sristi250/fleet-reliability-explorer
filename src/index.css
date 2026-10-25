@@ -261,12 +261,7 @@ main { padding-top: 28px; padding-bottom: 8px; outline: none; }
 .stat-label { font-size: 0.8rem; font-weight: 500; color: var(--ink-2); }
 .stat-value { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; margin-top: 4px; line-height: 1.15; }
 .stats-compact .stat-value { font-size: 1.1rem; margin-top: 2px; }
-.stat-hero {
-  position: relative; overflow: hidden;
-  background: linear-gradient(135deg, var(--accent-wash-2), var(--surface) 70%);
-  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
-}
-.stat-hero::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--accent); }
+/* The headline tile is a plain card; only its larger number sets it apart. */
 .stat-hero .stat-value { font-size: 2.6rem; letter-spacing: -0.03em; }
 .stat-sub { font-size: 0.8rem; color: var(--ink-2); margin-top: 6px; }
 .stat-trend { margin-top: 10px; }

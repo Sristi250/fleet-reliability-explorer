@@ -86,7 +86,7 @@ export function FleetHealth({ data, slice, setSlice, depots }: {
         />
         <Stat
           label="Distance Covered"
-          value={<AnimatedNumber value={head.km} format={(n) => (n === null ? '–' : `${fmt.compact(n)} km`)} />}
+          value={<AnimatedNumber value={head.km} format={fmt.distance} />}
           trend={<Sparkline values={fleetTrend.map((p) => p.km)} color="var(--muted-fill)" />}
           sub={`${head.buses} buses · line shows each month`}
         />
