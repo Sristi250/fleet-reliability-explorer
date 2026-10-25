@@ -1,0 +1,11 @@
+plant_code,depot,operating_company,eam_go_live
+PL1100,Northgate,Kestrel North,2023-11-01
+PL1200,Millbrook,Kestrel North,2024-03-01
+PL2100,Riverside,Kestrel East,2023-11-01
+PL2200,Eastmoor,Kestrel East,2024-07-01
+PL3100,Kingsway,Kestrel South,2024-03-01
+PL3200,Harbourside,Kestrel South,2024-11-01
+PL3300,Westfield,Kestrel South,2023-11-01
+PL4100,Ashcombe,Kestrel West,2025-03-01
+PL5100,Castlegate,Kestrel Scotland,2024-07-01
+PL5200,Glenholm,Kestrel Scotland,2024-11-01

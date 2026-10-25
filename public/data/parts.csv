@@ -1,0 +1,120 @@
+component,system,is_consumable,unit,models,superseded_by,part_number,description,list_price_gbp
+Entrance door actuator,Doors & access,False,EA,DD|SD,,P313326,Entrance door actuator assy,455.8
+Entrance door actuator,Doors & access,False,EA,DD|SD,,P905446,Entrance door actuator repair kit,103.4
+Door sensitive edge,Doors & access,False,EA,DD|SD,,P781404,Door sensitive edge assy,102.07
+Door control unit,Doors & access,False,EA,DD|SD,P942963,P704333,Door control unit assy rev A,801.93
+Door control unit,Doors & access,False,EA,DD|SD,,P942963,Door control unit assy rev B,845.2
+Door open/close button,Doors & access,False,EA,DD|SD,,P671295,Door open/close button assy,30.01
+Door seal,Doors & access,False,EA,DD|SD,,P553295,Door seal assy,55.98
+Emergency door release valve,Doors & access,False,EA,DD|SD,,P160852,Emergency door release valve assy,149.97
+Wheelchair ramp handle,Doors & access,False,EA,DD|SD,,P641196,Wheelchair ramp handle assy,37.53
+Wheelchair ramp handle,Doors & access,False,EA,DD|SD,,P304795,Wheelchair ramp handle repair kit,8.53
+Wheelchair ramp,Doors & access,False,EA,DD|SD,,P374633,Wheelchair ramp assy,641.71
+Kneeling valve,Doors & access,False,EA,DD|SD,,P701946,Kneeling valve assy,210.63
+24V blade fuse,Low-voltage electrical,False,EA,DD|SD,,P178640,24V blade fuse assy,4.24
+24V auxiliary battery,Low-voltage electrical,False,EA,DD|SD,,P457890,24V auxiliary battery assy,351.58
+Steering column switch,Low-voltage electrical,False,EA,DD|SD,,P753548,Steering column switch assy,82.72
+Side marker lamp,Low-voltage electrical,False,EA,DD|SD,,P952921,Side marker lamp assy,20.46
+Headlamp unit,Low-voltage electrical,False,EA,DD|SD,,P131974,Headlamp unit assy,298.53
+Rear lamp cluster,Low-voltage electrical,False,EA,DD|SD,,P713373,Rear lamp cluster assy,187.81
+Saloon light strip,Low-voltage electrical,False,EA,DD|SD,,P911906,Saloon light strip assy,112.29
+24V relay,Low-voltage electrical,False,EA,DD|SD,,P605195,24V relay assy,14.31
+Wiring harness repair section,Low-voltage electrical,False,EA,DD|SD,,P577320,Wiring harness repair section assy,48.65
+Wiper motor,Low-voltage electrical,False,EA,DD|SD,,P467254,Wiper motor assy,236.83
+Reversing camera,Low-voltage electrical,False,EA,DD|SD,,P539009,Reversing camera assy,204.58
+Horn,Low-voltage electrical,False,EA,DD|SD,,P653983,Horn assy,48.5
+Driver's seat,Driver's cab,False,EA,DD|SD,,P275215,Driver's seat assy,1354.87
+Driver's seat,Driver's cab,False,EA,DD|SD,,P754288,Driver's seat repair kit,373.44
+Cab seatbelt,Driver's cab,False,EA,DD|SD,,P233380,Cab seatbelt assy,126.99
+Cab door lock,Driver's cab,False,EA,DD|SD,,P433606,Cab door lock assy,74.78
+Instrument cluster,Driver's cab,False,EA,DD|SD,,P934475,Instrument cluster assy,1042.51
+Camera mirror monitor,Driver's cab,False,EA,DD|SD,,P616419,Camera mirror monitor assy,689.91
+Camera mirror housing,Driver's cab,False,EA,DD|SD,,P270581,Camera mirror housing assy,164.02
+Drive start switch,Driver's cab,False,EA,DD|SD,,P640109,Drive start switch assy,16.83
+Cab sun blind,Driver's cab,False,EA,DD|SD,,P585238,Cab sun blind assy,93.61
+Cab heater fan,Driver's cab,False,EA,DD|SD,,P406772,Cab heater fan assy,218.15
+Bell push,Saloon interior,False,EA,DD|SD,,P350734,Bell push assy,33.55
+Emergency break-glass button,Saloon interior,False,EA,DD|SD,,P915075,Emergency break-glass button assy,22.24
+Seat headrest cover,Saloon interior,False,EA,DD|SD,,P269726,Seat headrest cover assy,18.77
+Passenger seat frame,Saloon interior,False,EA,DD|SD,,P521392,Passenger seat frame assy,279.94
+Handrail bump pad,Saloon interior,False,EA,DD|SD,,P742209,Handrail bump pad assy,9.42
+USB-C charging port,Saloon interior,False,EA,DD|SD,,P891051,USB-C charging port assy,39.22
+Cup holder,Saloon interior,False,EA,DD|SD,,P154440,Cup holder assy,12.19
+Saloon air vent,Saloon interior,False,EA,DD|SD,,P617582,Saloon air vent assy,13.68
+Saloon heater fan,Saloon interior,False,EA,DD|SD,,P376347,Saloon heater fan assy,177.54
+Stair lighting,Saloon interior,False,EA,DD,,P694808,Stair lighting assy,64.38
+Upper deck window,Saloon interior,False,EA,DD,,P283004,Upper deck window assy,401.44
+Grab pole,Saloon interior,False,EA,DD|SD,,P594439,Grab pole assy,79.43
+Floor covering repair,Saloon interior,False,EA,DD|SD,,P665726,Floor covering repair assy,85.06
+Belly panel,Body & glazing,False,EA,DD|SD,,P170109,Belly panel assy,72.55
+Side skirt panel,Body & glazing,False,EA,DD|SD,,P939327,Side skirt panel assy,176.7
+Wheel trim,Body & glazing,False,EA,DD|SD,,P899697,Wheel trim assy,28.54
+Windscreen,Body & glazing,False,EA,DD|SD,,P536541,Windscreen assy,1064.87
+Side window,Body & glazing,False,EA,DD|SD,,P275696,Side window assy,364.92
+Rear service door lock,Body & glazing,False,EA,DD|SD,,P183472,Rear service door lock assy,47.68
+Wiper arm,Body & glazing,False,EA,DD|SD,,P569972,Wiper arm assy,48.74
+Bumper corner,Body & glazing,False,EA,DD|SD,,P766987,Bumper corner assy,262.11
+Mirror arm,Body & glazing,False,EA,DD|SD,,P997815,Mirror arm assy,222.81
+Air compressor,Brakes & air,False,EA,DD|SD,,P642981,Air compressor assy,1209.46
+Air compressor,Brakes & air,False,EA,DD|SD,,P205469,Air compressor repair kit,325.47
+Air dryer cartridge,Brakes & air,False,EA,DD|SD,,P685104,Air dryer cartridge assy,55.82
+Brake chamber,Brakes & air,False,EA,DD|SD,,P284467,Brake chamber assy,167.21
+Brake pad set,Brakes & air,False,EA,DD|SD,,P735259,Brake pad set assy,242.74
+ABS sensor,Brakes & air,False,EA,DD|SD,,P839376,ABS sensor assy,52.49
+Air line coupling,Brakes & air,False,EA,DD|SD,,P935907,Air line coupling assy,18.33
+Parking brake valve,Brakes & air,False,EA,DD|SD,,P680780,Parking brake valve assy,179.07
+Drag link,Steering & suspension,False,EA,DD|SD,,P134174,Drag link assy,332.87
+Track rod end,Steering & suspension,False,EA,DD|SD,,P611868,Track rod end assy,103.9
+Air suspension bellows,Steering & suspension,False,EA,DD|SD,,P910406,Air suspension bellows assy,129.22
+Shock absorber,Steering & suspension,False,EA,DD|SD,,P424034,Shock absorber assy,117.34
+Levelling valve,Steering & suspension,False,EA,DD|SD,,P929229,Levelling valve assy,108.61
+Anti-roll bar link,Steering & suspension,False,EA,DD|SD,,P793417,Anti-roll bar link assy,81.28
+Steering box,Steering & suspension,False,EA,DD|SD,,P376803,Steering box assy,2402.33
+HV fuse,HV & traction,False,EA,DD|SD,,P670037,HV fuse assy,58.8
+HV interlock connector,HV & traction,False,EA,DD|SD,,P135463,HV interlock connector assy,81.04
+DC/DC converter,HV & traction,False,EA,DD|SD,,P659755,DC/DC converter assy,3017.32
+Traction inverter,HV & traction,False,EA,DD|SD,,P351566,Traction inverter assy,9197.49
+Traction motor,HV & traction,False,EA,DD|SD,,P549265,Traction motor assy,16481.5
+Traction battery module,HV & traction,False,EA,DD|SD,,P620974,Traction battery module assy,7119.91
+Traction battery pack,HV & traction,False,EA,DD|SD,,P393276,Traction battery pack assy,76549.1
+Battery management controller,HV & traction,False,EA,DD|SD,,P878719,Battery management controller assy,1271.32
+HV cable assembly,HV & traction,False,EA,DD|SD,,P278936,HV cable assembly assy,513.13
+Insulation monitoring device,HV & traction,False,EA,DD|SD,,P651762,Insulation monitoring device assy,409.95
+Vehicle control unit,HV & traction,False,EA,DD|SD,,P909104,Vehicle control unit assy,1726.78
+Battery coolant pump,HV & traction,False,EA,DD|SD,,P383757,Battery coolant pump assy,454.81
+Battery chiller,HV & traction,False,EA,DD|SD,,P981182,Battery chiller assy,1947.98
+Charge inlet,Charging,False,EA,DD|SD,,P954277,Charge inlet assy,906.73
+Charge flap actuator,Charging,False,EA,DD|SD,,P738006,Charge flap actuator assy,63.5
+Charging controller,Charging,False,EA,DD|SD,,P967274,Charging controller assy,1723.07
+Saloon HVAC unit,Thermal & HVAC,False,EA,DD|SD,,P195411,Saloon HVAC unit assy,5939.92
+HVAC blower motor,Thermal & HVAC,False,EA,DD|SD,,P341091,HVAC blower motor assy,412.94
+Heat pump compressor,Thermal & HVAC,False,EA,DD|SD,,P969904,Heat pump compressor assy,4057.61
+Coolant hose,Thermal & HVAC,False,EA,DD|SD,,P121647,Coolant hose assy,37.14
+Coolant expansion cap,Thermal & HVAC,False,EA,DD|SD,,P179483,Coolant expansion cap assy,23.65
+Saloon recirculation fan,Thermal & HVAC,False,EA,DD|SD,,P221433,Saloon recirculation fan assy,80.76
+Destination display,Passenger info & CCTV,False,EA,DD|SD,,P189193,Destination display assy,1156.76
+Next-stop display,Passenger info & CCTV,False,EA,DD|SD,,P882340,Next-stop display assy,735.76
+Saloon CCTV camera,Passenger info & CCTV,False,EA,DD|SD,,P492353,Saloon CCTV camera assy,235.98
+CCTV recorder,Passenger info & CCTV,False,EA,DD|SD,,P530748,CCTV recorder assy,1626.46
+Telematics gateway,Passenger info & CCTV,False,EA,DD|SD,,P161322,Telematics gateway assy,482.37
+Audio announcement unit,Passenger info & CCTV,False,EA,DD|SD,,P643019,Audio announcement unit assy,608.15
+Cable tie 300mm,Consumables,True,EA,DD|SD,,P546939,Cable tie 300mm,0.12
+M6 flange nut,Consumables,True,EA,DD|SD,,P297248,M6 flange nut,0.35
+M8 hex bolt,Consumables,True,EA,DD|SD,,P965028,M8 hex bolt,0.55
+Blind rivet nut M6,Consumables,True,EA,DD|SD,,P250541,Blind rivet nut M6,0.85
+Pop rivet 4.8mm,Consumables,True,EA,DD|SD,,P216629,Pop rivet 4.8mm,0.08
+Sealant cartridge,Consumables,True,EA,DD|SD,,P930102,Sealant cartridge,8.4
+Threadlock 50ml,Consumables,True,EA,DD|SD,,P232065,Threadlock 50ml,9.1
+Insulation tape,Consumables,True,EA,DD|SD,,P262215,Insulation tape,1.4
+Crimp terminal,Consumables,True,EA,DD|SD,,P497241,Crimp terminal,0.3
+Heat shrink sleeve,Consumables,True,EA,DD|SD,,P529353,Heat shrink sleeve,0.45
+Battery coolant 50/50,Consumables,True,L,DD|SD,,P156594,Battery coolant 50/50,3.2
+Multipurpose grease,Consumables,True,KG,DD|SD,,P837320,Multipurpose grease,6.5
+Screenwash concentrate,Consumables,True,L,DD|SD,,P103572,Screenwash concentrate,1.1
+Cabin air filter,Consumables,True,EA,DD|SD,,P698422,Cabin air filter,24.0
+HVAC return air filter,Consumables,True,EA,DD|SD,,P318562,HVAC return air filter,38.0
+Wiper blade,Consumables,True,EA,DD|SD,,P334113,Wiper blade,16.0
+24V bulb,Consumables,True,EA,DD|SD,,P420455,24V bulb,2.5
+Gear oil,Consumables,True,L,DD|SD,,P572788,Gear oil,7.8
+Brake cleaner,Consumables,True,EA,DD|SD,,P724487,Brake cleaner,4.2
+Hand cleaner wipes,Consumables,True,EA,DD|SD,,P597310,Hand cleaner wipes,4.0

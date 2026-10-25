@@ -1,0 +1,26 @@
+# Real operator/manufacturer data must never enter this repo.
+*.xlsx
+*.xls
+*.xlsm
+real-data/
+# Private session notes - mention internal context.
+notes/
+
+node_modules/
+dist/
+dist-ssr/
+*.local
+.env*
+__pycache__/
+.venv/
+.DS_Store
+
+# Logs
+*.log
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.sw?

@@ -1,0 +1,338 @@
+{
+  "window": {
+    "end": "2026-05-31",
+    "labour_rate_gbp": 45,
+    "max_km_per_month": 15000
+  },
+  "fleet": {
+    "buses": 435,
+    "km_covered": 47929661,
+    "km_all_clean": 55790808,
+    "imputed_months": 2
+  },
+  "mdbf": {
+    "breakdowns": {
+      "events": 965,
+      "km": 47929661,
+      "mdbf_km": 49668
+    },
+    "breakdowns_and_driver_defects": {
+      "events": 4908,
+      "km": 47929661,
+      "mdbf_km": 9766
+    },
+    "all_corrective": {
+      "events": 9451,
+      "km": 47929661,
+      "mdbf_km": 5071
+    }
+  },
+  "mdbf_by_model": {
+    "DD": {
+      "events": 5255,
+      "km": 25239498,
+      "mdbf_km": 4803
+    },
+    "SD": {
+      "events": 4196,
+      "km": 22690163,
+      "mdbf_km": 5408
+    }
+  },
+  "top_components_by_events": [
+    {
+      "component": "Unmapped operator code",
+      "events": 944.0,
+      "parts_cost": 0.0,
+      "labour_hours": 812.98,
+      "labour_cost": 36584.25,
+      "km": 47929661,
+      "mdbf_km": 50773,
+      "total_cost": 36584.25,
+      "cost_per_1000km": 0.76
+    },
+    {
+      "component": "Seat headrest cover",
+      "events": 726.0,
+      "parts_cost": 19442.19,
+      "labour_hours": 390.93,
+      "labour_cost": 17592.0,
+      "km": 47929661,
+      "mdbf_km": 66019,
+      "total_cost": 37034.19,
+      "cost_per_1000km": 0.77
+    },
+    {
+      "component": "Bell push",
+      "events": 643.0,
+      "parts_cost": 31303.75,
+      "labour_hours": 413.15,
+      "labour_cost": 18591.75,
+      "km": 47929661,
+      "mdbf_km": 74541,
+      "total_cost": 49895.5,
+      "cost_per_1000km": 1.04
+    },
+    {
+      "component": "Saloon heater fan",
+      "events": 300.0,
+      "parts_cost": 57691.01,
+      "labour_hours": 437.68,
+      "labour_cost": 19695.75,
+      "km": 47929661,
+      "mdbf_km": 159766,
+      "total_cost": 77386.76,
+      "cost_per_1000km": 1.61
+    },
+    {
+      "component": "Wiring harness repair section",
+      "events": 297.0,
+      "parts_cost": 15519.71,
+      "labour_hours": 694.28,
+      "labour_cost": 31242.75,
+      "km": 47929661,
+      "mdbf_km": 161379,
+      "total_cost": 46762.46,
+      "cost_per_1000km": 0.98
+    },
+    {
+      "component": "Door open/close button",
+      "events": 285.0,
+      "parts_cost": 11876.61,
+      "labour_hours": 224.45,
+      "labour_cost": 10100.25,
+      "km": 47929661,
+      "mdbf_km": 168174,
+      "total_cost": 21976.86,
+      "cost_per_1000km": 0.46
+    },
+    {
+      "component": "Wiper arm",
+      "events": 248.0,
+      "parts_cost": 12909.87,
+      "labour_hours": 156.32,
+      "labour_cost": 7034.25,
+      "km": 47929661,
+      "mdbf_km": 193265,
+      "total_cost": 19944.12,
+      "cost_per_1000km": 0.42
+    },
+    {
+      "component": "Battery coolant pump",
+      "events": 244.0,
+      "parts_cost": 117061.87,
+      "labour_hours": 677.3,
+      "labour_cost": 30478.5,
+      "km": 47929661,
+      "mdbf_km": 196433,
+      "total_cost": 147540.37,
+      "cost_per_1000km": 3.08
+    },
+    {
+      "component": "Saloon recirculation fan",
+      "events": 227.0,
+      "parts_cost": 19789.46,
+      "labour_hours": 257.95,
+      "labour_cost": 11607.75,
+      "km": 47929661,
+      "mdbf_km": 211144,
+      "total_cost": 31397.21,
+      "cost_per_1000km": 0.66
+    },
+    {
+      "component": "24V auxiliary battery",
+      "events": 227.0,
+      "parts_cost": 83353.55,
+      "labour_hours": 326.47,
+      "labour_cost": 14691.0,
+      "km": 47929661,
+      "mdbf_km": 211144,
+      "total_cost": 98044.55,
+      "cost_per_1000km": 2.05
+    },
+    {
+      "component": "24V blade fuse",
+      "events": 217.0,
+      "parts_cost": 1326.56,
+      "labour_hours": 130.9,
+      "labour_cost": 5890.5,
+      "km": 47929661,
+      "mdbf_km": 220874,
+      "total_cost": 7217.06,
+      "cost_per_1000km": 0.15
+    },
+    {
+      "component": "Saloon CCTV camera",
+      "events": 210.0,
+      "parts_cost": 52283.25,
+      "labour_hours": 267.4,
+      "labour_cost": 12033.0,
+      "km": 47929661,
+      "mdbf_km": 228236,
+      "total_cost": 64316.25,
+      "cost_per_1000km": 1.34
+    },
+    {
+      "component": "Cup holder",
+      "events": 209.0,
+      "parts_cost": 3591.3,
+      "labour_hours": 90.97,
+      "labour_cost": 4093.5,
+      "km": 47929661,
+      "mdbf_km": 229329,
+      "total_cost": 7684.8,
+      "cost_per_1000km": 0.16
+    },
+    {
+      "component": "Door sensitive edge",
+      "events": 206.0,
+      "parts_cost": 22429.9,
+      "labour_hours": 319.3,
+      "labour_cost": 14368.5,
+      "km": 47929661,
+      "mdbf_km": 232668,
+      "total_cost": 36798.4,
+      "cost_per_1000km": 0.77
+    },
+    {
+      "component": "Coolant hose",
+      "events": 205.0,
+      "parts_cost": 11521.56,
+      "labour_hours": 285.78,
+      "labour_cost": 12860.25,
+      "km": 47929661,
+      "mdbf_km": 233803,
+      "total_cost": 24381.81,
+      "cost_per_1000km": 0.51
+    }
+  ],
+  "top_components_by_cost": [
+    {
+      "component": "Traction battery pack",
+      "events": 7.0,
+      "parts_cost": 544179.76,
+      "labour_hours": 115.5,
+      "labour_cost": 5197.5,
+      "km": 47929661,
+      "mdbf_km": 6847094,
+      "total_cost": 549377.26,
+      "cost_per_1000km": 11.46
+    },
+    {
+      "component": "Traction motor",
+      "events": 12.0,
+      "parts_cost": 200256.81,
+      "labour_hours": 89.1,
+      "labour_cost": 4009.5,
+      "km": 47929661,
+      "mdbf_km": 3994138,
+      "total_cost": 204266.31,
+      "cost_per_1000km": 4.26
+    },
+    {
+      "component": "Traction inverter",
+      "events": 17.0,
+      "parts_cost": 157366.02,
+      "labour_hours": 155.55,
+      "labour_cost": 6999.75,
+      "km": 47929661,
+      "mdbf_km": 2819392,
+      "total_cost": 164365.77,
+      "cost_per_1000km": 3.43
+    },
+    {
+      "component": "Battery coolant pump",
+      "events": 244.0,
+      "parts_cost": 117061.87,
+      "labour_hours": 677.3,
+      "labour_cost": 30478.5,
+      "km": 47929661,
+      "mdbf_km": 196433,
+      "total_cost": 147540.37,
+      "cost_per_1000km": 3.08
+    },
+    {
+      "component": "24V auxiliary battery",
+      "events": 227.0,
+      "parts_cost": 83353.55,
+      "labour_hours": 326.47,
+      "labour_cost": 14691.0,
+      "km": 47929661,
+      "mdbf_km": 211144,
+      "total_cost": 98044.55,
+      "cost_per_1000km": 2.05
+    },
+    {
+      "component": "Charging controller",
+      "events": 45.0,
+      "parts_cost": 80185.94,
+      "labour_hours": 118.45,
+      "labour_cost": 5330.25,
+      "km": 47929661,
+      "mdbf_km": 1065104,
+      "total_cost": 85516.19,
+      "cost_per_1000km": 1.78
+    },
+    {
+      "component": "Door control unit",
+      "events": 85.0,
+      "parts_cost": 72985.32,
+      "labour_hours": 161.5,
+      "labour_cost": 7267.5,
+      "km": 47929661,
+      "mdbf_km": 563878,
+      "total_cost": 80252.82,
+      "cost_per_1000km": 1.67
+    },
+    {
+      "component": "Wheelchair ramp",
+      "events": 106.0,
+      "parts_cost": 69875.6,
+      "labour_hours": 209.45,
+      "labour_cost": 9425.25,
+      "km": 47929661,
+      "mdbf_km": 452167,
+      "total_cost": 79300.85,
+      "cost_per_1000km": 1.65
+    },
+    {
+      "component": "Saloon heater fan",
+      "events": 300.0,
+      "parts_cost": 57691.01,
+      "labour_hours": 437.68,
+      "labour_cost": 19695.75,
+      "km": 47929661,
+      "mdbf_km": 159766,
+      "total_cost": 77386.76,
+      "cost_per_1000km": 1.61
+    },
+    {
+      "component": "Air compressor",
+      "events": 62.0,
+      "parts_cost": 59445.24,
+      "labour_hours": 188.55,
+      "labour_cost": 8484.75,
+      "km": 47929661,
+      "mdbf_km": 773059,
+      "total_cost": 67929.99,
+      "cost_per_1000km": 1.42
+    }
+  ],
+  "unmapped_share_of_events": 0.091,
+  "rm_cost": {
+    "parts_gbp": 2872394.76,
+    "labour_gbp": 605994.75,
+    "warranty_share": 0.5196,
+    "per_km_gbp": 0.0726
+  },
+  "naive": {
+    "km_sum_of_max_odometer": 63818007,
+    "corrective_lines": 14036,
+    "mdbf_km": 4547,
+    "mdbf_km_ignoring_eam_coverage": 5452,
+    "labour_hours_summed_per_line": 34743.4,
+    "labour_hours_once_per_wo": 16981.1,
+    "warranty_lines_wrong_model_via_fleet_ref": 0.3901,
+    "parts_with_more_than_one_operator_description": 11
+  }
+}
