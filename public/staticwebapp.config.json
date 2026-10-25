@@ -10,6 +10,6 @@
     { "route": "/data/*", "headers": { "Cache-Control": "public, max-age=3600" } }
   ],
   "mimeTypes": {
-    "csv": "text/csv"
+    ".csv": "text/csv"
   }
 }

@@ -60,7 +60,8 @@ const seen = new Map()
 
 for (const scheme of ['light', 'dark']) {
   for (const vp of viewports) {
-    const context = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, colorScheme: scheme })
+    // bypassCSP: the deployed site's CSP (rightly) blocks injecting axe; this is test-only.
+    const context = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, colorScheme: scheme, bypassCSP: true })
     for (const s of scenarios) {
       const page = await context.newPage()
       await page.goto(`${base}/#${s.hash}`)

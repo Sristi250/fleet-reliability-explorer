@@ -18,6 +18,7 @@
     "react-dom": "^19.3.1"
   },
   "devDependencies": {
+    "@azure/static-web-apps-cli": "^2.1.0",
     "@types/node": "^24.19.2",
     "@types/papaparse": "^5.5.2",
     "@types/react": "^19.3.0",
