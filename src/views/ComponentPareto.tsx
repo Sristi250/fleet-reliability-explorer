@@ -9,13 +9,14 @@ import { ChartCard, DataTable } from '../ui/ChartCard'
 import { FilterBar, Segmented, Stat } from '../ui/controls'
 import { EmptySlice, SliceFilters, type DepotInfo } from '../ui/SliceFilters'
 import { fmt } from '../ui/format'
+import { SearchChartIcon } from '../ui/icons'
 import { LineChart } from '../ui/LineChart'
 import { MODEL_LABEL } from '../ui/models'
 
 const RANK_OPTIONS: { value: RankBy; label: string }[] = [
   { value: 'events', label: 'Failures' },
-  { value: 'total_cost', label: 'Total cost' },
-  { value: 'labour_hours', label: 'Labour hours' },
+  { value: 'total_cost', label: 'Total Cost' },
+  { value: 'labour_hours', label: 'Labour Hours' },
   { value: 'cost_per_1000km', label: 'Cost per 1,000 km' },
 ]
 
@@ -51,50 +52,50 @@ export function ComponentPareto({ data, slice, setSlice, depots }: {
   const top10 = share[Math.min(9, share.length - 1)] ?? 0
   const unmapped = failureRows.find((r) => r.component === UNMAPPED)
   const totalFailures = failureRows.reduce((s, r) => s + r.events, 0)
-  const rankLabel = RANK_OPTIONS.find((o) => o.value === rankBy)!.label.toLowerCase()
+  const rankLabel = RANK_OPTIONS.find((o) => o.value === rankBy)!.label
   // A filter can remove the selected component; then show the empty state.
   const selectedRow = rows.find((r) => r.component === selected)
 
   return (
     <>
       <FilterBar>
-        <Segmented label="Rank by" value={rankBy} options={RANK_OPTIONS} onChange={setRankBy} />
+        <Segmented label="Rank By" value={rankBy} options={RANK_OPTIONS} onChange={setRankBy} />
         <SliceFilters slice={slice} setSlice={setSlice} depots={depots} />
         <label className="check">
           <input type="checkbox" checked={consumables} onChange={(e) => setConsumables(e.target.checked)} />
-          Show consumables
+          Show Consumables
         </label>
       </FilterBar>
 
       {failureRows.length === 0 ? <EmptySlice slice={slice} setSlice={setSlice} /> : <>
       <div className="stats">
-        <Stat hero label={`Top 10 components' share of ${rankLabel}`} value={fmt.pct(top10)} sub={`of ${named.length} named components with failures`} />
+        <Stat hero label={`Top 10 Components' Share of ${rankLabel}`} value={fmt.pct(top10)} sub={`Out of ${named.length} named components with failures`} />
         <Stat
-          label="Unmapped operator codes"
+          label="Unmapped Operator Codes"
           value={unmapped ? fmt.pct(unmapped.events / Math.max(1, totalFailures)) : '0%'}
-          sub="of failures can't be tied to a component yet"
+          sub="Of failures can't be tied to a component yet"
         />
       </div>
 
       <div className="pareto-grid">
         <ChartCard
-          title={`Components ranked by ${rankLabel}`}
-          subtitle={`Top ${SHOW}. Select one to see which batches and depots drive it.`}
+          title={`Components Ranked by ${rankLabel}`}
+          subtitle={`Top ${SHOW}. Select one to see which batches drive it.`}
           table={
             <DataTable
-              caption="All components"
+              caption="All Components"
               rowKey={(r) => `${r.component}${r.consumable}`}
               rows={rows}
               columns={[
-                { key: 'c', header: 'Component', cell: (r) => r.consumable ? `${r.component} (consumable)` : r.component },
-                { key: 's', header: 'System', cell: (r) => r.system },
+                { key: 'c', header: 'Component', cell: (r) => r.consumable ? `${fmt.title(r.component)} (Consumable)` : fmt.title(r.component) },
+                { key: 's', header: 'System', cell: (r) => fmt.title(r.system) },
                 { key: 'e', header: 'Failures', numeric: true, cell: (r) => fmt.int(r.events) },
                 { key: 'r', header: 'Per 100k km', numeric: true, cell: (r) => fmt.num(r.failures_per_100k_km, 2) },
                 { key: 'm', header: 'MDBF', numeric: true, cell: (r) => fmt.km(r.mdbf_km) },
-                { key: 'p', header: 'Parts', numeric: true, cell: (r) => fmt.gbp(r.parts_cost) },
-                { key: 'h', header: 'Labour h', numeric: true, cell: (r) => r.consumable ? '–' : fmt.int(r.labour_hours) },
-                { key: 't', header: 'Total cost', numeric: true, cell: (r) => fmt.gbp(r.total_cost) },
-                { key: 'k', header: '£ / 1,000 km', numeric: true, cell: (r) => fmt.gbp2(r.cost_per_1000km) },
+                { key: 'p', header: 'Parts Cost', numeric: true, cell: (r) => fmt.gbp(r.parts_cost) },
+                { key: 'h', header: 'Labour Hours', numeric: true, cell: (r) => r.consumable ? '–' : fmt.int(r.labour_hours) },
+                { key: 't', header: 'Total Cost', numeric: true, cell: (r) => fmt.gbp(r.total_cost) },
+                { key: 'k', header: '£ per 1,000 km', numeric: true, cell: (r) => fmt.gbp2(r.cost_per_1000km) },
               ]}
             />
           }
@@ -105,10 +106,10 @@ export function ComponentPareto({ data, slice, setSlice, depots }: {
             onSelect={(c) => setSelected((s) => (s === c ? null : c))}
             bars={rows.slice(0, SHOW).map((r) => ({
               key: r.component,
-              label: r.consumable ? `${r.component} · consumable` : r.component,
+              label: r.consumable ? `${fmt.title(r.component)} · Consumable` : fmt.title(r.component),
               note: r.component === UNMAPPED
                 ? 'Operator part codes with no cross-reference yet'
-                : r.consumable ? 'Not a failure: used on repairs, not replaced because it broke' : r.system,
+                : r.consumable ? 'Not a failure: used on repairs, not replaced because it broke' : fmt.title(r.system),
               value: r[rankBy],
               display: RANK_FORMAT[rankBy](r),
               muted: r.component === UNMAPPED || r.consumable,
@@ -119,10 +120,11 @@ export function ComponentPareto({ data, slice, setSlice, depots }: {
         {selectedRow
           ? <Drilldown key={selectedRow.component} data={data} slice={slice} row={selectedRow} onClose={() => setSelected(null)} />
           : (
-            <aside className="card drill-empty">
-              <h2 className="card-title">Pick a component</h2>
+            <aside className="card drill-empty" aria-label="Component Detail">
+              <span className="drill-empty-icon"><SearchChartIcon /></span>
+              <h3 className="card-title">Pick a Component</h3>
               <p>Select a component to see its failure rate by delivery batch and over time.</p>
-              <p className="hint">Try <button type="button" className="link" onClick={() => setSelected('Door control unit')}>Door control unit</button>.</p>
+              <p className="hint">Try <button type="button" className="link" onClick={() => setSelected('Door control unit')}>{fmt.title('Door control unit')}</button>.</p>
             </aside>
           )}
       </div>
@@ -140,18 +142,18 @@ function Drilldown({ data, slice, row, onClose }: {
   const fleetRate = row.failures_per_100k_km
 
   return (
-    <section className="card drill" aria-label={`${row.component} detail`}>
+    <section className="card drill" aria-label={`${fmt.title(row.component)} Detail`}>
       <header className="card-head">
         <div>
-          <h2 className="card-title">{row.component}</h2>
-          <p className="card-sub">{row.consumable ? 'Consumable (not counted as a failure)' : row.system}</p>
+          <h3 className="card-title">{fmt.title(row.component)}</h3>
+          <p className="card-sub">{row.consumable ? 'Consumable (not counted as a failure)' : fmt.title(row.system)}</p>
         </div>
         <button type="button" className="btn-ghost" onClick={onClose}>Close</button>
       </header>
       <div className="stats stats-compact">
         <Stat label="Failures" value={fmt.int(row.events)} />
         <Stat label="MDBF" value={fmt.km(row.mdbf_km)} />
-        <Stat label="Total cost" value={fmt.gbp(row.total_cost)} />
+        <Stat label="Total Cost" value={fmt.gbp(row.total_cost)} />
       </div>
 
       {row.component === UNMAPPED || row.consumable ? (
@@ -162,7 +164,7 @@ function Drilldown({ data, slice, row, onClose }: {
         </p>
       ) : (
         <>
-          <h3 className="sub-title">Failures per 100k km by delivery batch</h3>
+          <h4 className="sub-title">Failures per 100k km by Delivery Batch</h4>
           <p className="card-sub">Fleet rate for this component: {fmt.num(fleetRate, 2)}. Select a batch to compare it over time.</p>
           <BarList
             ariaLabel="Failures per 100k km by batch"
@@ -178,7 +180,7 @@ function Drilldown({ data, slice, row, onClose }: {
           />
           {focus && (
             <>
-              <h3 className="sub-title">{focus} against the rest of the fleet</h3>
+              <h4 className="sub-title">{focus} vs the Rest of the Fleet</h4>
               <LineChart
                 height={220}
                 labels={quarters.map((q) => q.month)}
@@ -188,7 +190,7 @@ function Drilldown({ data, slice, row, onClose }: {
                 ariaLabel={`Quarterly failures per 100k km for ${focus} and the rest of the fleet`}
                 series={[
                   { id: 'focus', label: focus, color: 'var(--series-2)', values: quarters.map((q) => q.focus) },
-                  { id: 'rest', label: 'Rest of fleet', color: 'var(--series-1)', values: quarters.map((q) => q.rest) },
+                  { id: 'rest', label: 'Rest of Fleet', color: 'var(--series-1)', values: quarters.map((q) => q.rest) },
                 ]}
               />
             </>

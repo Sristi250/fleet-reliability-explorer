@@ -25,9 +25,9 @@ export const FAILURE_DEFINITIONS = {
 export type FailureDefinition = keyof typeof FAILURE_DEFINITIONS
 
 export const FAILURE_DEFINITION_LABELS: Record<FailureDefinition, string> = {
-  breakdowns: 'In-service breakdowns',
-  breakdowns_and_driver_defects: 'Breakdowns + driver defects',
-  all_corrective: 'All corrective repairs',
+  breakdowns: 'In-Service Breakdowns',
+  breakdowns_and_driver_defects: 'Breakdowns + Driver Defects',
+  all_corrective: 'All Corrective Repairs',
 }
 
 /** Warranty claims have no work-order type; it only exists in the complaint text. */

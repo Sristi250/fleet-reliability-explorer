@@ -1,4 +1,16 @@
 import { useId, useState, type ReactNode } from 'react'
+import { InfoIcon } from './icons'
+
+/** The "how this is counted" callout under a view. */
+export function MethodNote({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <aside className="method" aria-label={title}>
+      <span className="method-icon"><InfoIcon /></span>
+      <h3>{title}</h3>
+      <ul>{children}</ul>
+    </aside>
+  )
+}
 
 export interface Column<R> {
   key: string
@@ -47,14 +59,14 @@ export function ChartCard({ title, subtitle, children, table, actions, className
     <section className={`card ${className ?? ''}`} aria-labelledby={headingId}>
       <header className="card-head">
         <div>
-          <h2 id={headingId} className="card-title">{title}</h2>
+          <h3 id={headingId} className="card-title">{title}</h3>
           {subtitle && <p className="card-sub">{subtitle}</p>}
         </div>
         <div className="card-actions">
           {actions}
           {table && (
             <button type="button" className="btn-ghost" aria-pressed={showTable} onClick={() => setShowTable((s) => !s)}>
-              {showTable ? 'Show chart' : 'Show table'}
+              {showTable ? 'Show Chart' : 'Show Table'}
             </button>
           )}
         </div>

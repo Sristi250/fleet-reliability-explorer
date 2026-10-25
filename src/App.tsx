@@ -2,15 +2,31 @@ import { useEffect, useMemo, useState, type KeyboardEvent, type MouseEvent } fro
 import { buildFleetData, type FleetData } from './data/clean'
 import { csvSource } from './data/source'
 import { ALL, type Slice } from './data/views'
+import { BusIcon } from './ui/icons'
+import type { DepotInfo } from './ui/SliceFilters'
 import { ComponentPareto } from './views/ComponentPareto'
 import { FleetHealth } from './views/FleetHealth'
 import { RmWhatIf } from './views/RmWhatIf'
-import type { DepotInfo } from './ui/SliceFilters'
 
 const TABS = [
-  { id: 'fleet', label: 'Fleet health', question: 'Is reliability improving?' },
-  { id: 'components', label: 'Component Pareto', question: 'Which components cost us most?' },
-  { id: 'whatif', label: 'R&M what-if', question: 'What is better reliability worth?' },
+  {
+    id: 'fleet',
+    label: 'Fleet Health',
+    question: 'Is Reliability Improving?',
+    description: 'Mean distance between failures (MDBF) across the fleet, by model and by depot.',
+  },
+  {
+    id: 'components',
+    label: 'Component Pareto',
+    question: 'Which Components Cost Us Most?',
+    description: 'Components ranked by failures or cost. Select one to see which delivery batches drive it.',
+  },
+  {
+    id: 'whatif',
+    label: 'R&M What-If',
+    question: 'What Is Better Reliability Worth?',
+    description: 'Make chosen components more reliable and see what it saves in repair and maintenance (R&M).',
+  },
 ] as const
 type TabId = (typeof TABS)[number]['id']
 
@@ -76,64 +92,72 @@ export default function App() {
   }
 
   return (
-    <div className="app">
-      <a className="skip" href="#main" onClick={skipToMain}>Skip to content</a>
+    <>
+      <a className="skip" href="#main" onClick={skipToMain}>Skip to Content</a>
       <header className="app-header">
-        <div className="brand">
-          <h1>Fleet Reliability Explorer</h1>
-          <p>Kestrel Bus Group · battery-electric fleet · <span className="badge">Synthetic data</span></p>
-        </div>
-        <nav>
-          <div role="tablist" aria-label="Views" className="tabs" onKeyDown={onTabKey}>
-            {TABS.map((t) => (
-              <button
-                key={t.id}
-                id={`tab-${t.id}`}
-                role="tab"
-                type="button"
-                aria-selected={tab === t.id}
-                aria-controls="panel"
-                tabIndex={tab === t.id ? 0 : -1}
-                className="tab"
-                onClick={() => select(t.id)}
-              >
-                {t.label}
-              </button>
-            ))}
+        <div className="container header-inner">
+          <div className="brand">
+            <span className="logo"><BusIcon /></span>
+            <div>
+              <h1>Fleet Reliability Explorer</h1>
+              <p>Kestrel Bus Group · Battery-Electric Fleet <span className="badge">Synthetic Data</span></p>
+            </div>
           </div>
-        </nav>
+          <nav aria-label="Views">
+            <div role="tablist" aria-label="Views" className="tabs" onKeyDown={onTabKey}>
+              {TABS.map((t) => (
+                <button
+                  key={t.id}
+                  id={`tab-${t.id}`}
+                  role="tab"
+                  type="button"
+                  aria-selected={tab === t.id}
+                  aria-controls="panel"
+                  tabIndex={tab === t.id ? 0 : -1}
+                  className="tab"
+                  onClick={() => select(t.id)}
+                >
+                  {t.label}
+                </button>
+              ))}
+            </div>
+          </nav>
+        </div>
       </header>
 
-      <main id="main" tabIndex={-1}>
+      <main id="main" className="container" tabIndex={-1}>
         <div id="panel" role="tabpanel" aria-labelledby={`tab-${tab}`}>
-        <p className="question">{current.question}</p>
-        {state.status === 'loading' && (
-          <div className="state" role="status">
-            <div className="spinner" aria-hidden="true" />
-            Loading and cleaning about 40,000 rows…
+          <div className="view-head">
+            <h2 className="view-title">{current.question}</h2>
+            <p className="view-desc">{current.description}</p>
           </div>
-        )}
-        {state.status === 'error' && (
-          <div className="state state-error" role="alert">
-            <strong>Couldn't load the fleet data.</strong>
-            <span>{state.message}</span>
-            <button type="button" className="btn-ghost" onClick={() => window.location.reload()}>Try again</button>
-          </div>
-        )}
-        {state.status === 'ready' && (
-          <>
-            {tab === 'fleet' && <FleetHealth data={state.data} slice={slice} setSlice={setSlice} depots={depots} />}
-            {tab === 'components' && <ComponentPareto data={state.data} slice={slice} setSlice={setSlice} depots={depots} />}
-            {tab === 'whatif' && <RmWhatIf data={state.data} />}
-          </>
-        )}
+          {state.status === 'loading' && (
+            <div className="state" role="status">
+              <div className="spinner" aria-hidden="true" />
+              Loading and cleaning about 37,000 rows…
+            </div>
+          )}
+          {state.status === 'error' && (
+            <div className="state state-error" role="alert">
+              <strong>Couldn't Load the Fleet Data</strong>
+              <span>{state.message}</span>
+              <button type="button" className="btn-ghost" onClick={() => window.location.reload()}>Try Again</button>
+            </div>
+          )}
+          {state.status === 'ready' && (
+            <>
+              {tab === 'fleet' && <FleetHealth data={state.data} slice={slice} setSlice={setSlice} depots={depots} />}
+              {tab === 'components' && <ComponentPareto data={state.data} slice={slice} setSlice={setSlice} depots={depots} />}
+              {tab === 'whatif' && <RmWhatIf data={state.data} />}
+            </>
+          )}
         </div>
       </main>
 
-      <footer className="app-footer">
+      <footer className="container app-footer">
         All data is synthetic, generated to resemble a UK battery-electric bus fleet. No real operator,
         manufacturer, vehicle or price appears. Analysis window: each depot's EAM go-live to 31 May 2026.
       </footer>
-    </div>
+    </>
   )
 }

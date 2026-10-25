@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import { UNMAPPED } from '../data/config'
 import { totalKm, type FleetData } from '../data/clean'
 import { ALL, DEFAULT_ASSUMPTIONS, paretoRows, whatIf, type Assumptions } from '../data/views'
-import { ChartCard, DataTable } from '../ui/ChartCard'
+import { ChartCard, DataTable, MethodNote } from '../ui/ChartCard'
 import { NumberField, Stat } from '../ui/controls'
 import { fmt } from '../ui/format'
 import { StackedBars, type Segment } from '../ui/StackedBars'
@@ -10,8 +10,8 @@ import { StackedBars, type Segment } from '../ui/StackedBars'
 const CANDIDATES = 15
 
 const SEGMENTS: Segment[] = [
-  { key: 'bus', label: 'Bus price', color: 'var(--series-1)' },
-  { key: 'rm', label: 'R&M (corrective)', color: 'var(--series-2)' },
+  { key: 'bus', label: 'Bus Price', color: 'var(--series-1)' },
+  { key: 'rm', label: 'R&M (Corrective)', color: 'var(--series-2)' },
   { key: 'energy', label: 'Energy', color: 'var(--series-3)' },
 ]
 
@@ -53,9 +53,9 @@ export function RmWhatIf({ data }: { data: FleetData }) {
     <div className="whatif">
       <div className="whatif-inputs">
         <section className="card" aria-labelledby="improve-h">
-          <h2 id="improve-h" className="card-title">Improve reliability</h2>
+          <h3 id="improve-h" className="card-title">Improve Reliability</h3>
           <div className="slider">
-            <label htmlFor="improve">MDBF improvement on chosen components</label>
+            <label htmlFor="improve">MDBF Improvement on Chosen Components</label>
             <div className="slider-row">
               <input id="improve" type="range" min={0} max={200} step={5} value={improvement}
                 onChange={(e) => setImprovement(e.target.valueAsNumber)} aria-valuetext={`${improvement} percent`} />
@@ -64,11 +64,11 @@ export function RmWhatIf({ data }: { data: FleetData }) {
             <p className="hint">+100% MDBF means half as many failures.</p>
           </div>
           <fieldset className="choices">
-            <legend>Components (costliest {CANDIDATES} fleet-wide)</legend>
+            <legend>Components (Costliest {CANDIDATES} Fleet-Wide)</legend>
             {candidates.map((c) => (
               <label key={c.component} className="choice">
                 <input type="checkbox" checked={chosen.has(c.component)} onChange={() => toggle(c.component)} />
-                <span className="choice-name">{c.component}</span>
+                <span className="choice-name">{fmt.title(c.component)}</span>
                 <span className="choice-meta">{fmt.gbp2(c.cost_per_1000km)} / 1,000 km</span>
               </label>
             ))}
@@ -76,38 +76,38 @@ export function RmWhatIf({ data }: { data: FleetData }) {
         </section>
 
         <section className="card" aria-labelledby="assume-h">
-          <h2 id="assume-h" className="card-title">Assumptions</h2>
+          <h3 id="assume-h" className="card-title">Assumptions</h3>
           <div className="fields">
-            <NumberField label="Labour rate" unit="£/h" value={a.labourRate} onChange={set('labourRate')} />
-            <NumberField label="Bus price" unit="£" step={5000} value={a.busPrice} onChange={set('busPrice')} />
-            <NumberField label="Energy use" unit="kWh/km" step={0.05} value={a.kwhPerKm} onChange={set('kwhPerKm')} />
+            <NumberField label="Labour Rate" unit="£/h" value={a.labourRate} onChange={set('labourRate')} />
+            <NumberField label="Bus Price" unit="£" step={5000} value={a.busPrice} onChange={set('busPrice')} />
+            <NumberField label="Energy Use" unit="kWh/km" step={0.05} value={a.kwhPerKm} onChange={set('kwhPerKm')} />
             <NumberField label="Electricity" unit="£/kWh" step={0.01} value={a.gbpPerKwh} onChange={set('gbpPerKwh')} />
             <NumberField label="Life" unit="years" value={a.lifeYears} onChange={set('lifeYears')} />
             <NumberField label="Distance" unit="km/year" step={1000} value={a.kmPerYear} onChange={set('kmPerYear')} />
           </div>
-          <button type="button" className="btn-ghost" onClick={() => setA(DEFAULT_ASSUMPTIONS)}>Reset assumptions</button>
+          <button type="button" className="btn-ghost" onClick={() => setA(DEFAULT_ASSUMPTIONS)}>Reset Assumptions</button>
         </section>
       </div>
 
       <div className="whatif-results">
         <div className="stats">
-          <Stat hero label="Saving per bus per year" value={fmt.gbp(r.savingPerBusYear)}
+          <Stat hero label="Saving per Bus per Year" value={fmt.gbp(r.savingPerBusYear)}
             sub={`${fmt.gbp(r.savingFleetYear)} a year across ${r.fleetBuses} buses`} />
-          <Stat label="Corrective R&M per km" value={fmt.gbp3(r.rmPerKmAfter)} sub={`from ${fmt.gbp3(r.rmPerKm)}`} />
-          <Stat label="R&M share of TCO" value={fmt.pct(rmShareAfter, 1)} sub={`from ${fmt.pct(rmShare, 1)}`} />
+          <Stat label="Corrective R&M per km" value={fmt.gbp3(r.rmPerKmAfter)} sub={`Today: ${fmt.gbp3(r.rmPerKm)}`} />
+          <Stat label="R&M Share of TCO" value={fmt.pct(rmShareAfter, 1)} sub={`Today: ${fmt.pct(rmShare, 1)}`} />
         </div>
 
         <ChartCard
-          title="Lifetime cost per bus"
+          title="Lifetime Cost per Bus"
           subtitle={`TCO = bus price + R&M + energy, over ${a.lifeYears} years and ${fmt.compact(a.kmPerYear * a.lifeYears)} km.`}
           table={
             <DataTable
-              caption="Lifetime cost per bus, before and after"
+              caption="Lifetime Cost per Bus, Before and After"
               rowKey={(row) => row.key}
-              rows={[{ key: 'Today', t: r.tco }, { key: 'With improvement', t: r.tcoAfter }]}
+              rows={[{ key: 'Today', t: r.tco }, { key: 'With Improvement', t: r.tcoAfter }]}
               columns={[
                 { key: 'k', header: 'Scenario', cell: (row) => row.key },
-                { key: 'b', header: 'Bus price', numeric: true, cell: (row) => fmt.gbp(row.t.bus) },
+                { key: 'b', header: 'Bus Price', numeric: true, cell: (row) => fmt.gbp(row.t.bus) },
                 { key: 'r', header: 'R&M', numeric: true, cell: (row) => fmt.gbp(row.t.rm) },
                 { key: 'e', header: 'Energy', numeric: true, cell: (row) => fmt.gbp(row.t.energy) },
                 { key: 't', header: 'Total', numeric: true, cell: (row) => fmt.gbp(total(row.t)) },
@@ -121,37 +121,34 @@ export function RmWhatIf({ data }: { data: FleetData }) {
             format={fmt.gbpCompact}
             rows={[
               { key: 'now', label: 'Today', values: r.tco },
-              { key: 'after', label: 'With improvement', values: r.tcoAfter },
+              { key: 'after', label: 'With Improvement', values: r.tcoAfter },
             ]}
           />
         </ChartCard>
 
-        <ChartCard title="Where the saving comes from" subtitle={`Per bus per year, at +${improvement}% MDBF.`}>
+        <ChartCard title="Where the Saving Comes From" subtitle={`Per bus per year, at +${improvement}% MDBF.`}>
           {chosen.size === 0 ? <p className="empty">Choose at least one component.</p> : (
             <DataTable
-              caption="Saving by component"
+              caption="Saving by Component"
               rowKey={(row) => row.component}
               rows={candidates.filter((c) => chosen.has(c.component))}
               columns={[
-                { key: 'c', header: 'Component', cell: (row) => row.component },
-                { key: 'f', header: 'Failures now', numeric: true, cell: (row) => fmt.int(row.events) },
-                { key: 'm', header: 'MDBF now', numeric: true, cell: (row) => fmt.km(row.mdbf_km) },
-                { key: 'cost', header: 'Cost now', numeric: true, cell: (row) => fmt.gbp(row.parts_cost + row.labour_hours * a.labourRate) },
-                { key: 's', header: 'Saving / bus / yr', numeric: true, cell: (row) => fmt.gbp2(perRowSaving(row.parts_cost + row.labour_hours * a.labourRate)) },
+                { key: 'c', header: 'Component', cell: (row) => fmt.title(row.component) },
+                { key: 'f', header: 'Failures Now', numeric: true, cell: (row) => fmt.int(row.events) },
+                { key: 'm', header: 'MDBF Now', numeric: true, cell: (row) => fmt.km(row.mdbf_km) },
+                { key: 'cost', header: 'Cost Now', numeric: true, cell: (row) => fmt.gbp(row.parts_cost + row.labour_hours * a.labourRate) },
+                { key: 's', header: 'Saving per Bus per Year', numeric: true, cell: (row) => fmt.gbp2(perRowSaving(row.parts_cost + row.labour_hours * a.labourRate)) },
               ]}
             />
           )}
         </ChartCard>
 
-        <aside className="method">
-          <h2>What this covers</h2>
-          <ul>
+        <MethodNote title="What This Covers">
             <li>R&M here is corrective repairs only: parts plus labour on failures. Preventive maintenance, tyres and accident damage are out of scope.</li>
             <li>Costs come from the whole fleet in the analysis window; the model and depot filters don't apply here.</li>
             <li>Parts are list prices; warranty parts use claimed cost. Warranty labour is estimated from the median workshop hours for the same component.</li>
             <li>Bus price, energy and life are placeholder assumptions. Change them to match a real quote.</li>
-          </ul>
-        </aside>
+        </MethodNote>
       </div>
     </div>
   )

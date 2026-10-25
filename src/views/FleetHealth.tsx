@@ -5,7 +5,7 @@ import { sum } from '../data/stats'
 import type { Model } from '../data/types'
 import { headline, mdbfBy, mdbfTrend, sliceData, type Slice } from '../data/views'
 import { BarList } from '../ui/BarList'
-import { ChartCard, DataTable } from '../ui/ChartCard'
+import { ChartCard, DataTable, MethodNote } from '../ui/ChartCard'
 import { Delta, FilterBar, Segmented, Stat } from '../ui/controls'
 import { EmptySlice, SliceFilters, type DepotInfo } from '../ui/SliceFilters'
 import { fmt } from '../ui/format'
@@ -62,7 +62,7 @@ export function FleetHealth({ data, slice, setSlice, depots }: {
   return (
     <>
       <FilterBar>
-        <Segmented label="Count as a failure" value={def} options={DEFINITION_OPTIONS} onChange={setDef} />
+        <Segmented label="Count as a Failure" value={def} options={DEFINITION_OPTIONS} onChange={setDef} />
         <SliceFilters slice={slice} setSlice={setSlice} depots={depots} />
       </FilterBar>
 
@@ -70,18 +70,18 @@ export function FleetHealth({ data, slice, setSlice, depots }: {
       <div className="stats">
         <Stat
           hero
-          label={`MDBF · ${FAILURE_DEFINITION_LABELS[def].toLowerCase()}`}
+          label={`MDBF · ${FAILURE_DEFINITION_LABELS[def]}`}
           value={fmt.km(head.mdbf)}
           sub={change === null ? undefined : (
             <Delta change={change} goodWhenUp text={`${fmt.pct(Math.abs(change))} last 6 months vs the 6 before`} />
           )}
         />
-        <Stat label="Failures counted" value={fmt.int(head.failures)} sub="distinct repairs" />
-        <Stat label="Distance covered" value={`${fmt.compact(head.km)} km`} sub={`${head.buses} buses`} />
+        <Stat label="Failures Counted" value={fmt.int(head.failures)} sub="Distinct repairs in the window" />
+        <Stat label="Distance Covered" value={`${fmt.compact(head.km)} km`} sub={`${head.buses} buses`} />
       </div>
 
       <ChartCard
-        title="MDBF trend"
+        title="MDBF Trend"
         subtitle="Rolling 3 months, by model. Higher is better."
         table={
           <DataTable
@@ -92,7 +92,7 @@ export function FleetHealth({ data, slice, setSlice, depots }: {
               { key: 'm', header: 'Month', cell: (r) => fmt.month(r.month) },
               { key: 'km', header: 'km', numeric: true, cell: (r) => fmt.int(r.km) },
               { key: 'f', header: 'Failures', numeric: true, cell: (r) => fmt.int(r.failures) },
-              { key: 'mdbf', header: 'MDBF (3 mo)', numeric: true, cell: (r) => fmt.km(r.rolling_mdbf) },
+              { key: 'mdbf', header: 'MDBF (3 Months)', numeric: true, cell: (r) => fmt.km(r.rolling_mdbf) },
             ]}
           />
         }
@@ -111,7 +111,7 @@ export function FleetHealth({ data, slice, setSlice, depots }: {
       </ChartCard>
 
       <ChartCard
-        title="MDBF by depot"
+        title="MDBF by Depot"
         subtitle={slice.model === 'all' ? 'All models. Higher is better.' : `${MODEL_LABEL[slice.model]} only. Higher is better.`}
         table={
           <DataTable
@@ -120,7 +120,7 @@ export function FleetHealth({ data, slice, setSlice, depots }: {
             rows={byDepot}
             columns={[
               { key: 'd', header: 'Depot', cell: (r) => r.key },
-              { key: 'g', header: 'EAM go-live', cell: (r) => fmt.month(goLive.get(r.key) ?? '') },
+              { key: 'g', header: 'EAM Go-Live', cell: (r) => fmt.month(goLive.get(r.key) ?? '') },
               { key: 'b', header: 'Buses', numeric: true, cell: (r) => r.buses },
               { key: 'km', header: 'km', numeric: true, cell: (r) => fmt.int(r.km) },
               { key: 'f', header: 'Failures', numeric: true, cell: (r) => fmt.int(r.failures) },
@@ -144,16 +144,13 @@ export function FleetHealth({ data, slice, setSlice, depots }: {
       </ChartCard>
       </>}
 
-      <aside className="method">
-        <h2>How this is counted</h2>
-        <ul>
+      <MethodNote title="How This Is Counted">
           <li><strong>MDBF</strong> = km driven ÷ failures, using the same bus-months for both.</li>
           <li>Each depot is counted only after it joined the EAM system. Before that, most failures were never recorded, so including them would make reliability look better than it was.</li>
           <li>A failure is one repair (work order or warranty claim) that used a non-consumable part. Ten rivets on one job are one failure, and returned parts are netted off.</li>
           <li>Warranty claims have no failure type, so it is read from the complaint text. About half of all breakdowns only appear on warranty claims.</li>
           <li>The window ends on 31 May 2026: later repairs are still being claimed.</li>
-        </ul>
-      </aside>
+      </MethodNote>
     </>
   )
 }
