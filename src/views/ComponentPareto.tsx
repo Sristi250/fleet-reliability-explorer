@@ -1,3 +1,4 @@
+import * as m from 'motion/react-m'
 import { useMemo, useState } from 'react'
 import { UNMAPPED } from '../data/config'
 import type { FleetData } from '../data/clean'
@@ -6,7 +7,7 @@ import {
 } from '../data/views'
 import { BarList } from '../ui/BarList'
 import { ChartCard, DataTable } from '../ui/ChartCard'
-import { FilterBar, Segmented, Stat } from '../ui/controls'
+import { AnimatedNumber, FilterBar, Segmented, Stat } from '../ui/controls'
 import { EmptySlice, SliceFilters, type DepotInfo } from '../ui/SliceFilters'
 import { fmt } from '../ui/format'
 import { SearchChartIcon } from '../ui/icons'
@@ -69,10 +70,15 @@ export function ComponentPareto({ data, slice, setSlice, depots }: {
 
       {failureRows.length === 0 ? <EmptySlice slice={slice} setSlice={setSlice} /> : <>
       <div className="stats">
-        <Stat hero label={`Top 10 Components' Share of ${rankLabel}`} value={fmt.pct(top10)} sub={`Out of ${named.length} named components with failures`} />
+        <Stat
+          hero
+          label={`Top 10 Components' Share of ${rankLabel}`}
+          value={<AnimatedNumber value={top10} format={(n) => fmt.pct(n ?? 0)} />}
+          sub={`Out of ${named.length} named components with failures`}
+        />
         <Stat
           label="Unmapped Operator Codes"
-          value={unmapped ? fmt.pct(unmapped.events / Math.max(1, totalFailures)) : '0%'}
+          value={<AnimatedNumber value={unmapped ? unmapped.events / Math.max(1, totalFailures) : 0} format={(n) => fmt.pct(n ?? 0)} />}
           sub="Of failures can't be tied to a component yet"
         />
       </div>
@@ -142,7 +148,13 @@ function Drilldown({ data, slice, row, onClose }: {
   const fleetRate = row.failures_per_100k_km
 
   return (
-    <section className="card drill" aria-label={`${fmt.title(row.component)} Detail`}>
+    <m.section
+      className="card drill"
+      aria-label={`${fmt.title(row.component)} Detail`}
+      initial={{ opacity: 0, x: 16 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+    >
       <header className="card-head">
         <div>
           <h3 className="card-title">{fmt.title(row.component)}</h3>
@@ -197,6 +209,6 @@ function Drilldown({ data, slice, row, onClose }: {
           )}
         </>
       )}
-    </section>
+    </m.section>
   )
 }

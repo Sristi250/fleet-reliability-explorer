@@ -2,7 +2,11 @@ import { useEffect, useMemo, useState, type KeyboardEvent, type MouseEvent } fro
 import { buildFleetData, type FleetData } from './data/clean'
 import { csvSource } from './data/source'
 import { ALL, type Slice } from './data/views'
+import { AnimatePresence } from 'motion/react'
+import * as m from 'motion/react-m'
 import { BusIcon } from './ui/icons'
+import { ViewSkeleton } from './ui/Skeleton'
+import { ThemeToggle } from './ui/ThemeToggle'
 import type { DepotInfo } from './ui/SliceFilters'
 import { ComponentPareto } from './views/ComponentPareto'
 import { FleetHealth } from './views/FleetHealth'
@@ -103,7 +107,7 @@ export default function App() {
               <p>Kestrel Bus Group · Battery-Electric Fleet <span className="badge">Synthetic Data</span></p>
             </div>
           </div>
-          <nav aria-label="Views">
+          <nav aria-label="Main">
             <div role="tablist" aria-label="Views" className="tabs" onKeyDown={onTabKey}>
               {TABS.map((t) => (
                 <button
@@ -117,26 +121,31 @@ export default function App() {
                   className="tab"
                   onClick={() => select(t.id)}
                 >
-                  {t.label}
+                  {tab === t.id && <m.span layoutId="tab-pill" className="tab-pill" transition={{ type: 'spring', bounce: 0.15, duration: 0.4 }} />}
+                  <span className="tab-text">{t.label}</span>
                 </button>
               ))}
             </div>
           </nav>
+          <ThemeToggle />
         </div>
       </header>
 
       <main id="main" className="container" tabIndex={-1}>
         <div id="panel" role="tabpanel" aria-labelledby={`tab-${tab}`}>
+          <AnimatePresence mode="wait" initial={false}>
+          <m.div
+            key={tab}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          >
           <div className="view-head">
             <h2 className="view-title">{current.question}</h2>
             <p className="view-desc">{current.description}</p>
           </div>
-          {state.status === 'loading' && (
-            <div className="state" role="status">
-              <div className="spinner" aria-hidden="true" />
-              Loading and cleaning about 37,000 rows…
-            </div>
-          )}
+          {state.status === 'loading' && <ViewSkeleton />}
           {state.status === 'error' && (
             <div className="state state-error" role="alert">
               <strong>Couldn't Load the Fleet Data</strong>
@@ -151,6 +160,8 @@ export default function App() {
               {tab === 'whatif' && <RmWhatIf data={state.data} />}
             </>
           )}
+          </m.div>
+          </AnimatePresence>
         </div>
       </main>
 

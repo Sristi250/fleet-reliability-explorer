@@ -6,7 +6,8 @@ import type { Model } from '../data/types'
 import { headline, mdbfBy, mdbfTrend, sliceData, type Slice } from '../data/views'
 import { BarList } from '../ui/BarList'
 import { ChartCard, DataTable, MethodNote } from '../ui/ChartCard'
-import { Delta, FilterBar, Segmented, Stat } from '../ui/controls'
+import { AnimatedNumber, Delta, FilterBar, Segmented, Stat } from '../ui/controls'
+import { Sparkline } from '../ui/Sparkline'
 import { EmptySlice, SliceFilters, type DepotInfo } from '../ui/SliceFilters'
 import { fmt } from '../ui/format'
 import { LineChart, type LineSeries } from '../ui/LineChart'
@@ -71,13 +72,24 @@ export function FleetHealth({ data, slice, setSlice, depots }: {
         <Stat
           hero
           label={`MDBF · ${FAILURE_DEFINITION_LABELS[def]}`}
-          value={fmt.km(head.mdbf)}
+          value={<AnimatedNumber value={head.mdbf} format={fmt.km} />}
+          trend={<Sparkline values={fleetTrend.map((p) => p.rolling_mdbf)} />}
           sub={change === null ? undefined : (
             <Delta change={change} goodWhenUp text={`${fmt.pct(Math.abs(change))} last 6 months vs the 6 before`} />
           )}
         />
-        <Stat label="Failures Counted" value={fmt.int(head.failures)} sub="Distinct repairs in the window" />
-        <Stat label="Distance Covered" value={`${fmt.compact(head.km)} km`} sub={`${head.buses} buses`} />
+        <Stat
+          label="Failures Counted"
+          value={<AnimatedNumber value={head.failures} format={(n) => (n === null ? '–' : fmt.int(n))} />}
+          trend={<Sparkline values={fleetTrend.map((p) => p.failures)} color="var(--muted-fill)" />}
+          sub="Distinct repairs · line shows each month"
+        />
+        <Stat
+          label="Distance Covered"
+          value={<AnimatedNumber value={head.km} format={(n) => (n === null ? '–' : `${fmt.compact(n)} km`)} />}
+          trend={<Sparkline values={fleetTrend.map((p) => p.km)} color="var(--muted-fill)" />}
+          sub={`${head.buses} buses · line shows each month`}
+        />
       </div>
 
       <ChartCard

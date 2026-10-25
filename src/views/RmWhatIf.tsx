@@ -3,7 +3,7 @@ import { UNMAPPED } from '../data/config'
 import { totalKm, type FleetData } from '../data/clean'
 import { ALL, DEFAULT_ASSUMPTIONS, paretoRows, whatIf, type Assumptions } from '../data/views'
 import { ChartCard, DataTable, MethodNote } from '../ui/ChartCard'
-import { NumberField, Stat } from '../ui/controls'
+import { AnimatedNumber, NumberField, Stat } from '../ui/controls'
 import { fmt } from '../ui/format'
 import { StackedBars, type Segment } from '../ui/StackedBars'
 
@@ -91,10 +91,15 @@ export function RmWhatIf({ data }: { data: FleetData }) {
 
       <div className="whatif-results">
         <div className="stats">
-          <Stat hero label="Saving per Bus per Year" value={fmt.gbp(r.savingPerBusYear)}
+          <Stat hero label="Saving per Bus per Year"
+            value={<AnimatedNumber value={r.savingPerBusYear} format={(n) => fmt.gbp(n ?? 0)} />}
             sub={`${fmt.gbp(r.savingFleetYear)} a year across ${r.fleetBuses} buses`} />
-          <Stat label="Corrective R&M per km" value={fmt.gbp3(r.rmPerKmAfter)} sub={`Today: ${fmt.gbp3(r.rmPerKm)}`} />
-          <Stat label="R&M Share of TCO" value={fmt.pct(rmShareAfter, 1)} sub={`Today: ${fmt.pct(rmShare, 1)}`} />
+          <Stat label="Corrective R&M per km"
+            value={<AnimatedNumber value={r.rmPerKmAfter} format={(n) => fmt.gbp3(n ?? 0)} />}
+            sub={`Today: ${fmt.gbp3(r.rmPerKm)}`} />
+          <Stat label="R&M Share of TCO"
+            value={<AnimatedNumber value={rmShareAfter} format={(n) => fmt.pct(n ?? 0, 1)} />}
+            sub={`Today: ${fmt.pct(rmShare, 1)}`} />
         </div>
 
         <ChartCard

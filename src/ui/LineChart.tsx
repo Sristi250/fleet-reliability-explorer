@@ -1,3 +1,4 @@
+import * as m from 'motion/react-m'
 import { useLayoutEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react'
 
 export interface LineSeries {
@@ -117,7 +118,19 @@ export function LineChart({
           ) : null)}
           {active !== null && <line className="crosshair" x1={x(active)} x2={x(active)} y1={M.top} y2={M.top + innerH} />}
           {series.map((s) => (
-            <path key={s.id} d={path(s.values)} fill="none" stroke={s.color} strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" />
+            // Draws in once on mount; later data changes just swap the path.
+            <m.path
+              key={s.id}
+              d={path(s.values)}
+              fill="none"
+              stroke={s.color}
+              strokeWidth={2}
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            />
           ))}
           {series.map((s) => {
             const i = active ?? lastIndex(s.values)
