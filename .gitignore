@@ -1,9 +1,9 @@
-# Real operator/manufacturer data must never enter this repo.
+# Spreadsheets and local data folders are never committed.
 *.xlsx
 *.xls
 *.xlsm
 real-data/
-# Private session notes - mention internal context.
+# Local working notes.
 notes/
 
 node_modules/
