@@ -2,9 +2,9 @@
 Generate the synthetic dataset for the Fleet Reliability & TCO Explorer.
 
 Shapes - fleet size, mileage, work-order mix, how concentrated part usage is,
-cost spread - are loosely modelled on a real UK battery-electric bus fleet,
-then rounded and perturbed. No real identifiers, part numbers, prices, depots
-or operator names appear. docs/data.md lists the tables and the data-quality
+cost spread - are designed to be realistic for a UK battery-electric bus
+fleet. No real identifiers, part numbers, prices, depots or operator names
+appear. docs/data.md lists the tables and the data-quality
 traps planted on purpose.
 
     python data-gen/generate.py        # writes public/data/*.csv
